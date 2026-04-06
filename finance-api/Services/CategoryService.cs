@@ -80,6 +80,7 @@ namespace finance_api.Services
                 throw new ArgumentException("Title is required");
             }
 
+            _dbContext.CurrentUserId = userId;
             ReturnCategory returnCategory = new();
             var category = _mapper.Map<Category>(create);
             category.UserId = userId;
@@ -93,6 +94,7 @@ namespace finance_api.Services
         }
         public async Task<bool> UpdateCategory(Guid categoryId, UpdateCategory update, Guid userId)
         {
+            _dbContext.CurrentUserId = userId;
             var existentCategory = await _dbContext.Categories.FirstOrDefaultAsync(c => c.Id == categoryId && c.UserId == userId) ?? throw new ArgumentException("Category not found");
 
             _mapper.Map(update, existentCategory);
