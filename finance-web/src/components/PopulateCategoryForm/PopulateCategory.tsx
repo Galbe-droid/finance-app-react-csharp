@@ -22,7 +22,19 @@ export default function PopulateCategory({open, onClose, selectedCategory}: Prop
             : selectedCategory
         }
 
-        const updateMap: UpdateTransactionDto = updated;        
+        const updateMap: UpdateTransactionDto = {
+            title: updated.title,
+            description: updated.description,
+            amount: updated.amount,
+            date: updated.date,
+            transactionType: updated.transactionType,
+            source: updated.source,
+            sourceName: updated.sourceName,
+            sourceDescription: updated.sourceDescription,
+            categoryId: updated.categoryId,
+            categoryName: updated.categoryName,
+        };        
+        
         await updateTransaction(t.id, updateMap);
     }
 
