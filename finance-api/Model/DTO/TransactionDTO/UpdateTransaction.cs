@@ -22,5 +22,7 @@ namespace finance_api.Model.DTO.TransactionDTO
         public string? SourceName { get; set; }
         [MaxLength(100, ErrorMessage = "SourceDescription has to be maximum of one hundred characters")]
         public string? SourceDescription { get; set; }
+        public Guid? CategoryId { get; set; }
+        public string CategoryName { get; set; } = string.Empty;
     }
 }

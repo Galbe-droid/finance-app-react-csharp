@@ -99,8 +99,6 @@ namespace finance_api.Services
             }
 
             _mapper.Map(update, transaction);
-            Console.WriteLine(update);
-            Console.WriteLine(transaction);
             transaction.SourceNaming();
             await _dbContext.SaveChangesAsync();
 
