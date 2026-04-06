@@ -34,7 +34,7 @@ export default function PopulateCategory({open, onClose, selectedCategory}: Prop
             categoryId: updated.categoryId,
             categoryName: updated.categoryName,
         };        
-        
+        console.log(updateMap);
         await updateTransaction(t.id, updateMap);
     }
 
