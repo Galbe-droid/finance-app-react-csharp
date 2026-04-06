@@ -94,7 +94,8 @@ builder.Services.AddCors(options =>
             policy
                 .WithOrigins("https://finance-app-react-csharp.vercel.app")
                 .AllowAnyHeader()
-                .AllowAnyMethod();
+                .AllowAnyMethod()
+                .AllowCredentials();
         });
 });
 
