@@ -5,6 +5,7 @@ import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AppProviders } from './provider/AppProviders.tsx'
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 
 createRoot(document.getElementById('root')!).render(
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
       <AppProviders>
         <App />
         <Analytics/>
+        <SpeedInsights/>
       </AppProviders>            
     </BrowserRouter>    
   </StrictMode>,
