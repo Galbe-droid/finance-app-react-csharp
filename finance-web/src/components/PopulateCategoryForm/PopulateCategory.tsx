@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function PopulateCategory({open, onClose, selectedCategory}: Props){
-    const {transactions, updateTransaction} = useTransactions();
+    const {transactions, getAll, getAllMinimal, updateTransaction} = useTransactions();
  
     const toggleTransaction = async(t:ReturnTransaction) => {        
         const updated = {
@@ -34,8 +34,9 @@ export default function PopulateCategory({open, onClose, selectedCategory}: Prop
             categoryId: updated.categoryId,
             categoryName: updated.categoryName,
         };        
-        console.log(updateMap);
         await updateTransaction(t.id, updateMap);
+        await getAll();
+        await getAllMinimal();
     }
 
     return(
