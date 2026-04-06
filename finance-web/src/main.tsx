@@ -4,7 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AppProviders } from './provider/AppProviders.tsx'
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react";
 
 
 createRoot(document.getElementById('root')!).render(
