@@ -20,6 +20,8 @@ export interface UpdateTransactionDto {
     source: SourceTypeValue;
     sourceName: string;
     sourceDescription: string;
+    categoryId?: string | null;
+    categoryName: string;
 }
 
 export interface MinimalTransaction {
@@ -30,7 +32,7 @@ export interface MinimalTransaction {
     transactionType: number;
     source: SourceTypeValue;
     sourceName: string;
-    categoryId: string | null;
+    categoryId?: string | null;
     categoryName: string;
 }
 
@@ -44,7 +46,7 @@ export interface ReturnTransaction{
     source: SourceTypeValue;
     sourceName: string;
     sourceDescription: string;
-    categoryId: string | null;
+    categoryId?: string | null;
     categoryName: string;
     createdAt: string;
 }

@@ -11,7 +11,7 @@ namespace finance_api.Model.DTO.TransactionDTO
         public TransactionType TransactionType { get; set; }
         public SourceType Source { get; set; }
         public string SourceName { get; set; }
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
         public string CategoryName { get; set; } = string.Empty;
     }
 }

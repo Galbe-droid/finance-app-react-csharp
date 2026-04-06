@@ -13,7 +13,7 @@ namespace finance_api.Model.DTO.TransactionDTO
         public SourceType Source { get; set; }
         public string SourceName { get; set; }
         public string SourceDescription { get; set; }
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
         public string CategoryName { get; set; } = string.Empty;
 
         public DateTimeOffset CreatedAt { get; set; } 

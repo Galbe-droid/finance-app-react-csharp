@@ -22,6 +22,8 @@ export default function TransactionForm({open, onClose, oldTransaction}: Props){
             source: 0,
             sourceName: '',
             sourceDescription: '',
+            categoryId: null,
+            categoryName: "",
         }:{
             title: oldTransaction.title,
             description: oldTransaction.description,
@@ -31,6 +33,8 @@ export default function TransactionForm({open, onClose, oldTransaction}: Props){
             source: oldTransaction.source,
             sourceName: oldTransaction.sourceName,
             sourceDescription: oldTransaction.sourceDescription,
+            categoryId: oldTransaction === null ? null : oldTransaction.categoryId,
+            categoryName: oldTransaction.categoryName,
         }   
     );
     const [errors, setErrors] = useState({
@@ -57,6 +61,8 @@ export default function TransactionForm({open, onClose, oldTransaction}: Props){
             source: 0,
             sourceName: '',
             sourceDescription: '',
+            categoryId: null,
+            categoryName: ""
         })
     }}, [oldTransaction]);
 
