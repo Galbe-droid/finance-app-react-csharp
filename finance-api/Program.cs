@@ -92,7 +92,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .WithOrigins("https://finance-app-react-csharp.vercel.app")
+                .SetIsOriginAllowed(origin => origin.Contains("vercel.app"))
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
