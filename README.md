@@ -86,7 +86,7 @@ As credenciais não estão versionadas e devem ser configuradas via User Secrets
 ![Transações](docs/transações.JPG)
 
 ### Categories
-![Categories](docs/categories.JPG)
+![Categories](docs/categorias.JPG)
 
 ### Opções Conta
 ![Opções Conta](docs/conta.JPG)
