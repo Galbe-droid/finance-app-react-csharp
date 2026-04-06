@@ -4,7 +4,6 @@ import type { CategoryDto, MinimalCategory, ReturnCategory } from "../models/Cat
 import api, { getAuthHeader } from "../api/api";
 import { useAuth } from "../auth/AuthContext";
 import { analytics } from "../analytics/analytics";
-import { useTransactions } from "./TransactionContext";
 
 type CategoryContextType = {
     categories: ReturnCategory[];
@@ -29,7 +28,6 @@ export function CategoryProvider({children}:{children: React.ReactNode}){
     const [minCategories, setMinCategories] = useState<MinimalCategory[]>([]);
 
     const { isAuthenticated } = useAuth();
-    const { minTransactions } = useTransactions();
 
     const getAll = async() => {
         try{
@@ -74,7 +72,7 @@ export function CategoryProvider({children}:{children: React.ReactNode}){
                 totalAmount: category.totalAmount,
                 balance: category.balance,
                 categoryType: category.categoryType,
-                transactionsCount: minTransactions.filter(t => t.categoryId === category.id).length,
+                transactionsCount: 0,
             })
             setCategories((prev) => [...prev, res.data as ReturnCategory]);
             setMinCategories((prev) => [...prev, minMapping(res.data as ReturnCategory)]);
