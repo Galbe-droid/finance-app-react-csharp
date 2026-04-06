@@ -20,8 +20,6 @@ export interface UpdateTransactionDto {
     source: SourceTypeValue;
     sourceName: string;
     sourceDescription: string;
-    categoryId: string | null;
-    categoryName: string;
 }
 
 export interface MinimalTransaction {
