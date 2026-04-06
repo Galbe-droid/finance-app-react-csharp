@@ -59,6 +59,7 @@ export default function Dashboard() {
             {!isAuthenticated && (
                 <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, mt: 4, mb: 4}}>
                     <Typography variant="h5" sx={{fontWeight: "bold"}}>Faça login para acessar o dashboard</Typography>
+                    <Typography variant="h5" sx={{fontWeight: "bold"}}>Host do server gratuito com dormencia requisições podem demorar</Typography>
                 </Box>
             )}
             {isAuthenticated && (
