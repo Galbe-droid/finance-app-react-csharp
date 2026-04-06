@@ -1,0 +1,16 @@
+# Node
+node_modules/
+dist/
+.env
+
+# Visual Studio
+bin/
+obj/
+.vs/
+
+# Logs
+*.log
+
+# User files
+*.user
+*.suo
