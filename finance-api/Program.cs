@@ -3,7 +3,6 @@ using finance_api.Services;
 using finance_api.Services.Interfaces;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -48,7 +47,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddDbContext<FinanceDBContext>(options =>
     {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
     }
 );
 
