@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useMemo, useState } from "
 import type { MinimalTransaction, ReturnTransaction, TransactionDto, UpdateTransactionDto } from "../models/Transaction"
 import api, { getAuthHeader } from "../api/api";
 import { useAuth } from "../auth/AuthContext";
+import { analytics } from "../analytics/analytics";
 
 type TransctionContextType = {
     transactions: ReturnTransaction[];
@@ -34,6 +35,7 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
             const res = await api.get("/Transaction", {headers: getAuthHeader()});
             return res.data
         }catch(err){
+            analytics.apiError("Get All Transactions: " + (err as Error).message);
             console.error(err)
         }
     }
@@ -43,6 +45,7 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
             const res = await api.get("/Transaction/minimal", {headers: getAuthHeader()});
             return res.data
         }catch(err){
+            analytics.apiError("Get All Minimal Transactions: " + (err as Error).message);
             console.error(err)
         }
     }
@@ -52,6 +55,7 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
             const res = await api.get(`/Transaction/${id}`, {headers: getAuthHeader()});
             return res.data
         }catch(err){
+            analytics.apiError("Get Transaction By Id: " + (err as Error).message);
             console.error(err)
         }
     }
@@ -67,8 +71,10 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
             setMinTrasactions((prev) => [...prev, res.data as ReturnTransaction]);
             await getAll();
             await getAllMinimal();
+            analytics.createTransaction();
             return res.data as ReturnTransaction;
         }catch(err){
+            analytics.apiError("Create Transaction: " + (err as Error).message);
             console.error(err);
         }
         return null;
@@ -93,6 +99,7 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
             await getAllMinimal();
             return res.data as ReturnTransaction;
         }catch(err){
+            analytics.apiError("Update Transaction: " + (err as Error).message);
             console.error(err);
         }
         return null;
@@ -109,8 +116,10 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
             );
             await getAll();
             await getAllMinimal();
+            analytics.deleteTransaction();
             return res.data;
         }catch(err){
+            analytics.apiError("Delete Transaction: " + (err as Error).message);
             console.error(err);
         }
         return null;

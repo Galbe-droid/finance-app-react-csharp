@@ -7,6 +7,8 @@ import { useCategories } from "../context/CategoryContext";
 import { BarChart } from '@mui/x-charts/BarChart';
 import type { MinimalTransaction, ReturnTransaction } from "../models/Transaction";
 import { PieChart } from "@mui/x-charts/PieChart";
+import { analytics } from "../analytics/analytics";
+import { useEffect } from "react";
 
 
 export default function Dashboard() {
@@ -16,6 +18,10 @@ export default function Dashboard() {
     
     const largestProfitCategory = Math.max(...categories.map(c => c.balance ))
     const largestProfitCategoryName = categories.find((c) => c.balance === largestProfitCategory)
+
+    useEffect(() => {
+        analytics.viewDashboard();
+    }  , []);
 
     const formatMonth = (date: Date) =>
         date.toLocaleString("pt-BR", {

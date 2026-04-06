@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { createContext, useContext, useState } from "react";
 import api from "../api/api";
 import type { RegisterUser, UpdateEmail, UpdateName, UpdatePassword, UpdateUsername, UserInfo } from "../models/User";
+import { analytics } from "../analytics/analytics";
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -26,11 +26,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const login = (token: string, userInfo: UserInfo) => {
         try{            
             localStorage.setItem("userInfo", JSON.stringify(userInfo))
+            analytics.login();
             localStorage.setItem("token", token);   
             setUser(userInfo)         
             setIsAuthenticated(true);
         }catch(err){
-            console.error(err);
+            analytics.apiError("Login: " + (err as Error).message);
         }        
     }
 
@@ -47,6 +48,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             return { success: true };
         }catch(err : any){
             console.error(err);
+            analytics.apiError("Register: " + (err as Error).message);
             return { success: false, errors: err.response?.data?.errors, };
         }
     }
@@ -57,7 +59,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             localStorage.setItem("userInfo", JSON.stringify(response.data as UserInfo))
             setUser(response.data as UserInfo);
             return response.data;
-        }catch(err){
+        }catch(err){            
+            analytics.apiError("Name Update: " + (err as Error).message);
             console.error(err);
         }
     }
@@ -68,6 +71,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(response.data as UserInfo);
             return response.data;
         }catch(err){
+            analytics.apiError("Password Update: " + (err as Error).message);
             console.error(err);
         }
     }
@@ -79,6 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(response.data as UserInfo);
             return response.data;
         }catch(err){
+            analytics.apiError("Email Update: " + (err as Error).message);
             console.error(err);
         }
     }
@@ -90,6 +95,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(response.data as UserInfo);
             return response.data;
         }catch(err){
+            analytics.apiError("Username Update: " + (err as Error).message);
             console.error(err);
         }
     }
@@ -100,6 +106,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             await api.delete(`/Auth/delete/${id}`);
             logout();
         }catch(err){
+            analytics.apiError("Delete Account: " + (err as Error).message);
             console.error(err);
         }
     }

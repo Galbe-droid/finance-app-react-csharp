@@ -4,6 +4,7 @@ import './index.css'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AppProviders } from './provider/AppProviders.tsx'
+import { Analytics } from "@vercel/analytics/next"
 
 
 createRoot(document.getElementById('root')!).render(
@@ -11,6 +12,7 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter> 
       <AppProviders>
         <App />
+        <Analytics/>
       </AppProviders>            
     </BrowserRouter>    
   </StrictMode>,

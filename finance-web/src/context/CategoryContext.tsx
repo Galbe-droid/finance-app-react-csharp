@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import type { CategoryDto, MinimalCategory, ReturnCategory } from "../models/Category"
 import api, { getAuthHeader } from "../api/api";
 import { useAuth } from "../auth/AuthContext";
+import { analytics } from "../analytics/analytics";
 
 type CategoryContextType = {
     categories: ReturnCategory[];
@@ -33,6 +34,7 @@ export function CategoryProvider({children}:{children: React.ReactNode}){
             const res = await api.get("/Category", {headers: getAuthHeader()});
             return res.data
         }catch(err){
+            analytics.apiError("Get All Categories: " + (err as Error).message);
             console.error(err)
         }
     }
@@ -42,6 +44,7 @@ export function CategoryProvider({children}:{children: React.ReactNode}){
             const res = await api.get("/Category/minimal", {headers: getAuthHeader()});
             return res.data
         }catch(err){
+            analytics.apiError("Get All Minimal Categories: " + (err as Error).message);
             console.error(err)
         }
     }
@@ -51,6 +54,7 @@ export function CategoryProvider({children}:{children: React.ReactNode}){
             const res = await api.get(`/Category/${id}`, {headers: getAuthHeader()});
             return res.data
         }catch(err){
+            analytics.apiError("Get Category By Id: " + (err as Error).message);
             console.error(err)
         }
     }
@@ -65,8 +69,10 @@ export function CategoryProvider({children}:{children: React.ReactNode}){
             setCategories((prev) => [...prev, res.data as ReturnCategory]);
             await getAll();
             await getAllMinimal();
+            analytics.createCategory();
             return res.data as ReturnCategory;
         }catch(err){
+            analytics.apiError("Create Category: " + (err as Error).message);
             console.error(err);
         }
         return null;
@@ -91,6 +97,7 @@ export function CategoryProvider({children}:{children: React.ReactNode}){
             await getAllMinimal();
             return res.data as ReturnCategory;
         }catch(err){
+            analytics.apiError("Add Transaction to Category: " + (err as Error).message);
             console.error(err);
         }
         return null;
@@ -115,6 +122,7 @@ export function CategoryProvider({children}:{children: React.ReactNode}){
             await getAllMinimal();
             return res.data as ReturnCategory;
         }catch(err){
+            analytics.apiError("Remove Transaction from Category: " + (err as Error).message);
             console.error(err);
         }
         return null;
@@ -139,6 +147,7 @@ export function CategoryProvider({children}:{children: React.ReactNode}){
             await getAllMinimal();
             return res.data as ReturnCategory;
         }catch(err){
+            analytics.apiError("Update Category: " + (err as Error).message);
             console.error(err);
         }
         return null;
@@ -155,8 +164,10 @@ export function CategoryProvider({children}:{children: React.ReactNode}){
             );
             await getAll();
             await getAllMinimal();
+            analytics.deleteCategory();
             return res.data;
         }catch(err){
+            analytics.apiError("Delete Category: " + (err as Error).message);
             console.error(err);
         }
         return null;
