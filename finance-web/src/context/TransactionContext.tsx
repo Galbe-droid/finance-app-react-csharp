@@ -8,8 +8,8 @@ import { analytics } from "../analytics/analytics";
 type TransctionContextType = {
     transactions: ReturnTransaction[];
     setTransactions: (t: ReturnTransaction[]) => void;
-    minTrasactions: MinimalTransaction[];
-    setMinTrasactions: (m: MinimalTransaction[]) => void;
+    minTransactions: MinimalTransaction[];
+    setMinTransactions: (m: MinimalTransaction[]) => void;
     getAll: () => Promise<ReturnTransaction[]>;
     getAllMinimal: () => Promise<MinimalTransaction[]>;
     getById: (id: string) => Promise<ReturnTransaction>;
@@ -26,7 +26,7 @@ const TransactionContext = createContext<TransctionContextType | null>(null);
 
 export function TransactionProvider({children}:{children: React.ReactNode}){
     const [transactions, setTransactions] = useState<ReturnTransaction[]>([]);
-    const [minTrasactions, setMinTrasactions] = useState<MinimalTransaction[]>([]);
+    const [minTransactions, setMinTransactions] = useState<MinimalTransaction[]>([]);
 
     const { isAuthenticated } = useAuth();
 
@@ -68,7 +68,7 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
               }
             });
             setTransactions((prev) => [...prev, res.data as ReturnTransaction]);
-            setMinTrasactions((prev) => [...prev, res.data as ReturnTransaction]);
+            setMinTransactions((prev) => [...prev, res.data as ReturnTransaction]);
             await getAll();
             await getAllMinimal();
             analytics.createTransaction();
@@ -91,7 +91,7 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
                 prev.map((t) =>
                   t.id === id ? { ...t, ...updateTransaction } : t)
             );
-            setMinTrasactions((prev) =>
+            setMinTransactions((prev) =>
                 prev.map((t) =>
                   t.id === id ? { ...t, ...updateTransaction } : t)
             );
@@ -111,7 +111,7 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
             setTransactions((prev) =>
                 prev.filter((t) => t.id !== id)
             );
-            setMinTrasactions((prev) =>
+            setMinTransactions((prev) =>
                 prev.filter((t) => t.id !== id)
             );
             await getAll();
@@ -150,7 +150,7 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
     }, [transactions]);
 
     const transactionClearCache = () => {
-        setMinTrasactions([]);
+        setMinTransactions([]);
         setTransactions([]);
     }
 
@@ -164,7 +164,7 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
                 
                 if(isMounted){
                   setTransactions(data);
-                  setMinTrasactions(dataMin);
+                  setMinTransactions(dataMin);
                 }
             }
         }
@@ -177,8 +177,8 @@ export function TransactionProvider({children}:{children: React.ReactNode}){
     }, [isAuthenticated])
 
     return(
-        <TransactionContext.Provider value={{transactions, setTransactions, minTrasactions,
-                                             setMinTrasactions, getAll, getAllMinimal, getById,
+        <TransactionContext.Provider value={{transactions, setTransactions, minTransactions,
+                                             setMinTransactions, getAll, getAllMinimal, getById,
                                              createTransaction, updateTransaction, deleteTransaction,
                                              transactionClearCache, balance, income, expense}}>
             {children}

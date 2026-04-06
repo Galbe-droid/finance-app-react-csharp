@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 export default function Dashboard() {
     const { isAuthenticated } = useAuth()
-    const { minTrasactions, balance, income, expense} = useTransactions();
+    const { minTransactions, balance, income, expense} = useTransactions();
     const { categories } = useCategories();
     
     const largestProfitCategory = Math.max(...categories.map(c => c.balance ))
@@ -51,7 +51,7 @@ export default function Dashboard() {
         }));
     };
 
-    const data = groupByMonth(minTrasactions);
+    const data = groupByMonth(minTransactions);
 
     return(  
         
@@ -121,7 +121,7 @@ export default function Dashboard() {
                             )}
                         </LargeCard>
                         <LargeCard>
-                            {minTrasactions &&(
+                            {minTransactions &&(
                                 <BarChart
                                     xAxis={[{ 
                                         scaleType: "band",
