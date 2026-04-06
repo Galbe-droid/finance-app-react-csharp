@@ -79,3 +79,19 @@ O projeto utiliza:
 As credenciais não estão versionadas e devem ser configuradas via User Secrets ou variáveis de ambiente.
 ```
 
+### Dashboard
+![Dashboard](docs/dashboard.JPG)
+
+### Transações
+![Transações](docs/transações.JPG)
+
+### Categories
+![Categories](docs/categories.JPG)
+
+### Opções Conta
+![Opções Conta](docs/conta.JPG)
+
+### Dark Mode
+![Dark Mode](docs/darkmode.JPG)
+
+
